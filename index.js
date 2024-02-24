@@ -120,7 +120,6 @@ app.post("/delete",(req, res)=>{
 const itemSchema = new mongoose.Schema({
     reqParameter : String,
     taskList : [{
-        _id : Number,
         task : String
     }]
 });
@@ -141,7 +140,6 @@ app.get("/:parameter", async (req, res)=>{
                 const newItem = new Item({
                     reqParameter: parameter,
                     taskList : [{
-                        _id : 0,
                         task : `Add Your Todo for ${parameter}`
                     }]
                 });
@@ -193,6 +191,14 @@ app.post("/added/:parameter", async (req, res)=>{
             await Item.updateOne({reqParameter: parameter}, {$push: { taskList: newTodo }}).then((data) => {
                 if (data) {
                     console.log(`successfull to add ${newTodo}`);
+                    // to show exiting todolist
+                    Item.findOne({reqParameter: parameter}).then(async (data)=>{
+                        await res.render(__dirname + "/views/index.ejs",{
+                            title: parameter,
+                            Todolist : data.taskList,
+                            parameter : parameter
+                        });
+                    });
                 } else {
                     console.log(err);
                 };
@@ -201,9 +207,6 @@ app.post("/added/:parameter", async (req, res)=>{
     };
     findTodo();
     }
-    
-    // go to /parameter again
-    res.redirect(`/${parameter}`);
 });
 
 app.post("/delete/:parameter", async(req, res)=>{
