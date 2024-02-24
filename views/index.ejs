@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style.css">
+    <link rel="icon" href="../src/logo.ico" type="image/png">
+    <title>To Do List</title>
+</head>
+<body>
+    <div class="mainContainer">
+        <% if (locals.title) { %>
+            <h1><%= title %></h1>
+            <% } else { %>
+                <h1>Your To Do Today</h1>
+        <% } %>        
+        <div class="date"><%= new Date().getDay()+1 %>:<%= new Date().getDate() %>:<%= new Date().getMonth()+1 %>:<%= new Date().getFullYear() %></div>
+        <div class="todoContainer">
+            <% if (locals.Todolist && locals.Todolist.length > 0) { %>
+                <% if (Todolist.length > 1) { %>
+                    <% if (locals.parameter) { %>
+                        <% for( let i = 1; i < locals.Todolist.length; i++ ) { %>
+                            <form action="/delete/<%= parameter  %>" method="POST">
+                                <div class="list">
+                                    <input type="checkbox" class="cBox" id="checkbox<%= i %>" onchange="this.form.submit()" name="checkbox" value="<%= Todolist[i]._id %>">
+                                    <label for="checkbox<%= i %>"><%= Todolist[i].task %></label>
+                                </div>
+                            </form>
+                            <% } %>
+                            <% } else { %>
+                                <% for( let i = 1; i < locals.Todolist.length; i++ ) { %>
+                                    <form action="/delete" method="POST">
+                                        <div class="list">
+                                            <input type="checkbox" class="cBox" id="checkbox<%= i %>" onchange="this.form.submit()" name="checkbox" value="<%= Todolist[i]._id %>">
+                                            <label for="checkbox<%= i %>"><%= Todolist[i].task %></label>
+                                        </div>
+                                    </form>
+                            <% } %>
+                        <% } %>
+                <% } else { %>
+                    <div class="list">
+                        <input type="checkbox" class="cBox" id="checkbox1" value="nilai1">
+                        <label for="checkbox"> <%= Todolist[0].task %> </label>
+                    </div>
+                    <% } %>
+            <% } else { %>
+                <div class="list">
+                    <input type="checkbox" class="cBox" id="checkbox1" value="nilai1">
+                    <label for="checkbox"> Cannot access TodoList! </label>
+                </div>
+            <% } %>
+            <% if (locals.parameter) { %>
+                <form id="form" action="/added/<%= parameter  %>" method="POST">
+                    <div class="add">
+                        <textarea class="list" name="newTodo" id="addTodo" cols="30" rows="10"></textarea>
+                        <button class="btn" type="submit">+</button>
+                    </div>
+                </form>
+                <% } else { %>
+                    <form id="form" action="/added" method="POST">
+                        <div class="add">
+                            <textarea class="list" name="newTodo" id="addTodo" cols="30" rows="10"></textarea>
+                            <button class="btn" type="submit">+</button>
+                        </div>
+                    </form>
+            <% } %>
+                
+        </div>
+    </div>
+    <script>
+        var form = document.getElementById('form');
+        var textArea = document.getElementById('addTodo');
+
+        form.addEventListener("submit", function (event) {
+            if (textArea.value.trim() === "") {
+                event.preventDefault(); 
+                alert('Type some text in text box!');
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+body {
+    background-color: black;
+    color: white;
+    display: flex;
+    margin: 0px;
+}
+
+.navBar {
+    width: 170px;
+    height: 100vh;
+    background-color: rgb(224, 244, 210);
+    color: black;
+    margin: 0px;
+}
+
+.opt {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    font-size: 25px;
+    font-weight: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.opt:hover {
+    background-color: black;
+    color: white;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+.date {
+    background-color: blueviolet;
+    height: 40px;
+    width: 300px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.mainContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.todoContainer {
+    width: 400px;
+    margin-top: 20px;
+    border-radius: 5px;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    background-color:rgb(70, 67, 67);
+    display: flex;
+    flex-direction: column;
+}
+
+.list {
+    color: white;
+    border: solid white 1px;
+    list-style: none;
+    width: 350px;
+    height: 50px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    border-radius: 5px;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.cBox {
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+}
+
+input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+}
+
+#addTodo {
+    resize: none;
+    width: 280px;
+    height: 30px;
+    background-color: rgb(200, 197, 197);
+    border-radius: 0px 0px -100px 0px;
+    margin-right: 5px;
+    color: black;
+    padding: 10px;
+}
+
+.add {
+    display: flex;
+}
+
+button {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(56, 253, 138, 0.848);
+    border: none;
+    padding: 0px;
+    font-size: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
